@@ -139,7 +139,7 @@ def page(slug, title, desc, active, body, hero_title=None, hero_sub=None):
 
 HOME = f"""
 <div class="hero" id="top">
-  <div class="wrap">
+  <div class="hero-copy">
     <img class="hero-crest" src="assets/img/crest.png" alt="Stemma dell'Istituto del Verbo Incarnato">
     <p class="eyebrow">Torino · Maria Madre della Chiesa</p>
     <h1>Una casa, una famiglia, una missione</h1>
@@ -149,6 +149,10 @@ HOME = f"""
       <a class="btn btn-ghost" href="{PET}">La Petizione</a>
     </div>
   </div>
+  <figure class="hero-photo">
+    <img src="assets/img/loreto.jpg" alt="La Santa Casa di Loreto: l'altare con l'immagine della Madonna e l'iscrizione «Hic Verbum caro factum est»">
+    <figcaption>La Santa Casa di Loreto</figcaption>
+  </figure>
 </div>
 
 <div class="facts">
@@ -179,7 +183,7 @@ HOME = f"""
     <div>
       <p class="eyebrow">Chi siamo</p>
       <h2>Una presenza viva nel quartiere</h2>
-      <p class="lead">Siamo la comunità che si raduna attorno ai padri dell'Istituto del Verbo Incarnato e alla parrocchia di Maria Madre della Chiesa, in via Baltimora. Qui il carisma dell'Incarnazione prende la forma di cose semplici: l'Eucaristia esposta ogni giorno, i ragazzi che crescono, le famiglie che si incontrano, i giovani che si preparano al sacerdozio.</p>
+      <p class="lead">Siamo la comunità che si raduna attorno ai padri dell'Istituto del Verbo Incarnato e alla parrocchia di Maria Madre della Chiesa, in via Baltimora. La comunità è affidata a Maria Santissima di Loreto, la cui Santa Casa è il segno dell'Incarnazione. Qui il carisma prende la forma di cose semplici: l'Eucaristia esposta ogni giorno, i ragazzi che crescono, le famiglie che si incontrano, i giovani che si preparano al sacerdozio.</p>
       <p>Questo sito raccoglie gli orari, le iniziative e i canali con cui restare in contatto. Se è la prima volta che ci visiti, comincia dall'Adorazione: è il cuore di tutto il resto.</p>
       <a class="btn btn-line" href="comunita.html">Conosci la comunità</a>
     </div>
@@ -344,6 +348,22 @@ COMUNITA = f"""
       </dl>
       <a class="btn btn-primary" style="width:100%;justify-content:center" href="contatti.html">Come arrivare</a>
     </aside>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">La patrona</p>
+      <h2>Maria Santissima di Loreto</h2>
+      <p class="lead">La comunità è affidata a Maria Santissima di Loreto. La Santa Casa venerata nel santuario marchigiano è, secondo la tradizione, la casa di Nazareth dove l'angelo annunciò a Maria l'Incarnazione del Verbo.</p>
+      <p>Accanto a quella casa si leggono le parole che l'Istituto ha preso come motto — <i>Hic Verbum caro factum est</i>, «qui il Verbo si è fatto carne» — e che dicono il modo in cui questa comunità legge la propria vita: Dio che entra nella storia, in una casa, in un quartiere, dentro le giornate di chi ci passa.</p>
+      <p>Non è una devozione ornamentale. È il motivo per cui l'Adorazione resta il centro della giornata e per cui la parrocchia è casa prima che struttura.</p>
+    </div>
+    <figure style="margin:0">
+      <img src="assets/img/loreto.jpg" alt="La Santa Casa di Loreto con l'iscrizione «Hic Verbum caro factum est»" style="border:1px solid var(--line)">
+      <figcaption>La Santa Casa di Loreto, dove il Verbo si è fatto carne.</figcaption>
+    </figure>
   </div>
 </section>
 

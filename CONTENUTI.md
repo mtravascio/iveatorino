@@ -41,8 +41,8 @@ elencati nel `README.md`, altrimenti le pagine si contraddicono.
 
 ## 3. Foto
 
-Il sito oggi non ha nessuna fotografia della chiesa: la copertina è un fondo grafico
-con lo stemma. Servono:
+La copertina e la sezione «La patrona» mostrano la **Santa Casa di Loreto**, con la
+didascalia giusta. Manca invece una fotografia della chiesa di via Baltimora. Servono:
 
 - **una copertina** orizzontale della chiesa (navata o altare), almeno 2000 px di
   larghezza, senza persone riconoscibili;

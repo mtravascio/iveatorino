@@ -33,7 +33,7 @@ docs/                ← è questa la cartella pubblicata da GitHub Pages
 ├── contatti.html        recapiti, mappa, newsletter
 ├── privacy.html         informativa
 ├── assets/css/style.css
-├── assets/img/          crest.png (stemma), evento.jpg (locandina)
+├── assets/img/          crest.png (stemma), loreto.jpg (Santa Casa), evento.jpg (locandina)
 ├── CNAME                www.iveatorino.it — lo usa GitHub Pages, non cancellarlo
 └── .nojekyll            dice a GitHub di non processare i file con Jekyll
 ```

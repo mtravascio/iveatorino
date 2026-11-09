@@ -78,18 +78,24 @@ header{position:sticky;top:0;z-index:50;background:rgba(250,246,236,.95);backdro
 .burger{display:none;background:none;border:1px solid var(--line);border-radius:2px;padding:9px 11px;cursor:pointer}
 .burger span{display:block;width:20px;height:2px;background:var(--ink);margin:4px 0}
 
-/* hero home (fondo grafico, in attesa di una foto vera della chiesa) */
-.hero{position:relative;min-height:620px;display:flex;align-items:flex-end;color:#fff;isolation:isolate;overflow:hidden;
-  background:radial-gradient(120% 130% at 80% 15%,#8E2D40 0%,#6A1E2C 40%,#33161A 100%)}
-.hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(180deg,rgba(20,10,12,.05) 0%,rgba(20,10,12,.12) 45%,rgba(20,10,12,.55) 100%)}
+/* hero home: testo a sinistra, Santa Casa di Loreto a destra */
+.hero{position:relative;display:grid;grid-template-columns:1.02fr .98fr;align-items:stretch;min-height:620px;color:#fff;overflow:hidden;
+  background:radial-gradient(120% 130% at 12% 18%,#8E2D40 0%,#6A1E2C 46%,#33161A 100%)}
+.hero-copy{display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;
+  padding:92px 56px 104px max(28px,calc((100vw - 1160px)/2))}
 .hero-crest{width:76px;height:76px;border-radius:50%;margin-bottom:26px;box-shadow:0 0 0 1px rgba(233,199,127,.55),0 10px 30px -10px rgba(0,0,0,.5)}
-.hero .wrap{position:relative;z-index:2;width:100%;padding-top:96px;padding-bottom:104px}
-.hero .eyebrow{color:#E9C77F}
+.hero .eyebrow{color:#E9C77F;letter-spacing:.15em}
 .hero .eyebrow::before{background:#E9C77F}
-.hero h1{color:#fff;font-size:clamp(2.6rem,5.4vw,4.4rem);line-height:1.06;max-width:16ch;text-shadow:0 2px 30px rgba(0,0,0,.3)}
-.hero p{max-width:56ch;font-size:1.14rem;color:#F2E9DA;margin-top:22px;font-weight:300}
-.hero .actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+.hero h1{color:#fff;font-size:clamp(2.5rem,4.6vw,3.9rem);line-height:1.07;max-width:15ch;text-shadow:0 2px 30px rgba(0,0,0,.25)}
+.hero p{max-width:46ch;font-size:1.08rem;color:#F2E9DA;margin-top:20px;font-weight:300}
+.hero .actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
+.hero-photo{position:relative;margin:0;overflow:hidden}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block}
+.hero-photo::after{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(90deg,rgba(51,22,26,.62) 0%,rgba(51,22,26,.12) 38%,rgba(51,22,26,0) 70%)}
+.hero-photo figcaption{position:absolute;top:20px;left:24px;right:auto;bottom:auto;z-index:2;
+  font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:#F3E6D3;
+  text-shadow:0 1px 10px rgba(0,0,0,.85)}
 
 /* hero interno */
 .page-hero{position:relative;min-height:330px;display:flex;align-items:flex-end;color:#fff;isolation:isolate;overflow:hidden;margin-bottom:-60px;
@@ -255,10 +261,15 @@ footer .brand small{color:#9A8E7E}
   .burger{display:block}
   .topbar{display:none}
   .hero-crest{width:62px;height:62px;margin-bottom:18px}
+  .hero .eyebrow{font-size:.66rem;letter-spacing:.11em}
+  .hero .eyebrow::before{width:22px;margin-right:8px}
   .issues{grid-template-columns:1fr}
   section{padding:72px 0}
-  .hero{min-height:520px}
-  .hero .wrap{padding-top:72px;padding-bottom:118px}
+  .hero{grid-template-columns:1fr;min-height:0}
+  .hero-photo{order:-1;aspect-ratio:4/3;max-height:400px}
+  .hero-photo::after{background:linear-gradient(180deg,rgba(20,10,12,.45),rgba(20,10,12,0) 40%,rgba(20,10,12,.35))}
+  .hero-photo figcaption{top:auto;bottom:14px;left:20px}
+  .hero-copy{padding:34px 28px 96px}
   .facts{margin-top:-46px}
   .page-hero{min-height:260px;margin-bottom:-40px}
   .page-hero .wrap{padding-bottom:96px;padding-top:50px}
