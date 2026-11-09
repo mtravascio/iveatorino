@@ -26,6 +26,7 @@ NAV = [
     ("adorazione.html", "Adorazione"),
     ("orari.html", "Orari"),
     ("eventi.html", "Eventi"),
+    ("formazione.html", "Formazione"),
     ("contatti.html", "Contatti"),
 ]
 
@@ -279,6 +280,21 @@ HOME = f"""
   </div>
 </section>
 
+<section class="tight" id="rivista">
+  <div class="wrap rivista">
+    <figure class="poster" style="max-width:320px">
+      <img src="assets/img/rivista-cristo-in-tutto.jpg" alt="Copertina del primo numero della rivista «Cristo in Tutto», novembre 2026">
+      <figcaption>«Cristo in Tutto», n. 1 — novembre 2026</figcaption>
+    </figure>
+    <div>
+      <p class="eyebrow">La rivista</p>
+      <h2>«Cristo in Tutto»</h2>
+      <p class="lead">«Omnia in Christo instauranda»: è uscito il primo numero della rivista del Terzo Ordine. Ansia, Santa Messa, ateismo moderno, il Politico di Gand: quattro articoli per ricapitolare tutto in Cristo.</p>
+      <p><a class="btn btn-line" href="formazione.html">Tutti i materiali di formazione</a></p>
+    </div>
+  </div>
+</section>
+
 <section class="quote tight">
   <div class="wrap">
     <p class="eyebrow" style="text-align:center">Il motto dell'Istituto</p>
@@ -452,6 +468,22 @@ ADORAZIONE = f"""
     <p class="note">La domenica le confessioni seguono l'orario feriale. Per un colloquio in altri momenti scrivi a <a href="mailto:{MAIL}">{MAIL}</a>.</p>
   </div>
 </section>
+
+<section class="tight">
+  <div class="wrap split" style="align-items:center">
+    <div class="prose">
+      <p class="eyebrow">La locandina</p>
+      <h2>Un'ora davanti al Santissimo</h2>
+      <p class="lead">L'Adorazione non è un servizio da organizzare: è tempo davanti a Dio. La locandina della comunità lo ricorda ogni anno, e le ore da coprire sono ancora tante.</p>
+      <p><a class="btn btn-primary" href="{CAL}">Prenota la tua ora</a></p>
+      <p class="note">Gli orari aggiornati sono quelli qui sopra: venerdì 9:00 – 18:00, primo giovedì del mese dalle 22:00.</p>
+    </div>
+    <figure class="poster" style="max-width:420px">
+      <img src="assets/img/locandina-adorazione.jpg" alt="Locandina dell'Adorazione eucaristica continua: l'ostensorio con il Santissimo">
+      <figcaption>Adorazione eucaristica continua · Maria Madre della Chiesa</figcaption>
+    </figure>
+  </div>
+</section>
 """
 
 ORARI = f"""
@@ -542,6 +574,25 @@ EVENTI = f"""
         <a class="go" href="orari.html">Dettagli</a>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="hours">
+  <div class="wrap">
+    <p class="eyebrow">Terzo Ordine · Eventi nazionali</p>
+    <h2>Novembre 2026</h2>
+    <p class="lead" style="max-width:64ch;margin-bottom:14px">Due appuntamenti del Terzo Ordine Secolare aperti anche agli amici, a Montefiascone (VT), nel santuario di San Flaviano.</p>
+    <div class="twoup">
+      <figure class="poster">
+        <img src="assets/img/locandina-ritiro.jpg" alt="Locandina del Ritiro di Formazione Nazionale del Terzo Ordine, 20-22 novembre 2026">
+        <figcaption><b>Ritiro di Formazione Nazionale</b>20 – 22 novembre 2026 · Montefiascone (VT)</figcaption>
+      </figure>
+      <figure class="poster">
+        <img src="assets/img/locandina-cristo-re.jpg" alt="Locandina della Solennità di Cristo Re, 22 novembre 2026, Montefiascone">
+        <figcaption><b>Solennità di Cristo Re</b>22 novembre 2026 · Seminario «Marco Antonio Barbarigo»</figcaption>
+      </figure>
+    </div>
+    <p class="note" style="margin-top:26px">Iscrizioni e quota: i riferimenti sono in locandina. Per organizzarci con l'andata da Torino scrivi a <a href="mailto:{MAIL}">{MAIL}</a>.</p>
   </div>
 </section>
 
@@ -636,6 +687,101 @@ PRIVACY = f"""
 </section>
 """
 
+VIRTUS = [
+    ("virtus-01-esame-particolare.pdf", "Virtus 1", "L'esame particolare e il difetto dominante", "", 76),
+    ("virtus-03-duc-in-altum.pdf", "Virtus 3", "«Duc in altum!»", "Essenza e formazione della magnanimità", 40),
+    ("virtus-04-educazione-e-grazia.pdf", "Virtus 4", "Da lupi ad agnelli", "Educazione e grazia", 48),
+    ("virtus-07-crisi-di-paternita.pdf", "Virtus 7", "Crisi di paternità", "Il padre assente", 72),
+    ("virtus-10-cammino-del-perdono.pdf", "Virtus 10", "Il cammino del perdono", "", 160),
+    ("virtus-13-maturita-secondo-cristo.pdf", "Virtus 13", "La maturità secondo Cristo", "L'uomo alla luce del Discorso della Montagna", 134),
+    ("virtus-14-meditazioni-dio-padre.pdf", "Virtus 14", "Meditazioni su Dio Padre", "", 88),
+    ("virtus-15-superficialita-e-frivolo.pdf", "Virtus 15", "La superficialità e la sindrome del frivolo", "", 64),
+    ("virtus-16-educare-la-volonta.pdf", "Virtus 16", "Educare la volontà", "", 164),
+    ("virtus-17-confidate-nel-signore.pdf", "Virtus 17", "«Confidate sempre nel Signore»", "Psicologia e spiritualità della fiducia · Salmo 62,9", 68),
+    ("virtus-18-maturare-la-personalita.pdf", "Virtus 18", "Maturare la personalità", "", 100),
+    ("virtus-20-l-accidia.pdf", "Virtus 20", "L'accidia", "Appunti psicologici e spirituali sul «male della delusione»", 99),
+]
+
+DOCS = [
+    ("catechismo-maggiore-pio-x.pdf", "Catechismo", "Il Catechismo Maggiore di San Pio X", "Le quattro parti della dottrina cristiana: il Credo, l'orazione, i comandamenti, i sacramenti.", 127),
+    ("guida-del-terziario.pdf", "Terzo Ordine", "Essere una nuova incarnazione del Verbo", "Manuale del Terzo Ordine Secolare dell'Istituto del Verbo Incarnato.", 55),
+    ("rege-o-maria.pdf", "Mariologia", "Rege O Maria", "", 150),
+]
+
+
+def doc_grid(items):
+    """Schede PDF: dimensione calcolata dal file, non scritta a mano."""
+    cards = []
+    for fname, label, title, sub, pages in items:
+        path = os.path.join(OUT, "assets", "pdf", fname)
+        size = "%.1f MB" % (os.path.getsize(path) / 1048576.0)
+        sub_html = '<p class="sub">%s</p>' % sub if sub else ""
+        cards.append(
+            '      <article class="doc">\n'
+            '        <p class="n">%s</p>\n'
+            '        <h3>%s</h3>\n'
+            '        %s\n'
+            '        <p class="meta">%d pagine · %s</p>\n'
+            '        <a class="dl" href="assets/pdf/%s" target="_blank" rel="noopener">Apri il PDF</a>\n'
+            '      </article>' % (label, title, sub_html, pages, size.replace(".", ","), fname)
+        )
+    return '<div class="docs">\n' + "\n".join(cards) + "\n    </div>"
+
+
+FORMAZIONE = f"""
+<section class="tight">
+  <div class="wrap">
+    <div class="prose" style="max-width:74ch">
+      <p class="eyebrow">Formazione</p>
+      <h2>I libri della comunità</h2>
+      <p class="lead">La formazione dei terziari e degli amici dell'Istituto passa da pochi testi scelti: la collana <em>Virtus</em> di p. Miguel Ángel Fuentes, i documenti del Terzo Ordine, il catechismo della tradizione. Sono tutti qui, da leggere o scaricare.</p>
+      <p>Sono file PDF: si aprono nel browser e restano consultabili anche senza connessione, una volta scaricati. Non serve registrarsi.</p>
+    </div>
+  </div>
+</section>
+
+<section class="hours">
+  <div class="wrap">
+    <p class="eyebrow">Collana Virtus</p>
+    <h2 style="margin-bottom:10px">Formazione umana e spirituale</h2>
+    <p class="note" style="max-width:66ch;margin-bottom:34px">Dodici volumi di p. Miguel Ángel Fuentes, IVE — Ediciones IVE. Psicologia e vita interiore: il difetto dominante, la volontà, la maturità, il perdono, l'accidia.</p>
+    {doc_grid(VIRTUS)}
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap">
+    <p class="eyebrow">Documenti</p>
+    <h2 style="margin-bottom:34px">Manuali e sussidi</h2>
+    {doc_grid(DOCS)}
+    <p class="note" style="margin-top:26px">I testi sono pubblicati con il permesso dell'Istituto del Verbo Incarnato. Se un file non si apre o trovi un errore, scrivi a <a href="mailto:{MAIL}">{MAIL}</a>.</p>
+  </div>
+</section>
+
+<section class="hours">
+  <div class="wrap split" style="align-items:center">
+    <div class="prose">
+      <p class="eyebrow">La rivista</p>
+      <h2>«Cristo in Tutto»</h2>
+      <p class="lead">«Omnia in Christo instauranda» — tutto ricapitolare in Cristo. Il primo numero è uscito il 1° novembre 2026.</p>
+      <p>In questo numero:</p>
+      <ul class="ticks">
+        <li>Il grande male del secolo: l'ansia</li>
+        <li>Il tesoro della Santa Messa</li>
+        <li>Introduzione all'ateismo moderno</li>
+        <li>L'annunciazione del Politico di Gand</li>
+      </ul>
+      <p><a class="btn btn-line" href="assets/img/rivista-indice.jpg" target="_blank" rel="noopener">Sfoglia l'indice</a></p>
+      <p class="note">Per ricevere i prossimi numeri iscriviti alla newsletter della comunità.</p>
+    </div>
+    <figure class="poster" style="max-width:340px">
+      <img src="assets/img/rivista-cristo-in-tutto.jpg" alt="Copertina del primo numero della rivista «Cristo in Tutto», novembre 2026">
+      <figcaption>«Cristo in Tutto», n. 1 — novembre 2026</figcaption>
+    </figure>
+  </div>
+</section>
+"""
+
 PAGES = [
     ("index.html", "IVE a Torino — Amici e terziari dell'Istituto del Verbo Incarnato",
      "La comunità laicale di amici e terziari dell'Istituto del Verbo Incarnato a Torino: Adorazione eucaristica, orari della chiesa di Maria Madre della Chiesa, petizione per il ritorno dei padri.",
@@ -652,6 +798,9 @@ PAGES = [
     ("eventi.html", "Eventi — IVE a Torino",
      "Gli appuntamenti della comunità IVE a Torino: incontri, serate culturali, liturgie e iniziative aperte a tutti.",
      "eventi.html", EVENTI, "Eventi", "Le iniziative aperte a tutti, dentro e fuori la parrocchia."),
+    ("formazione.html", "Formazione — IVE a Torino",
+     "La Collana Virtus di p. Miguel Ángel Fuentes, il Catechismo di San Pio X, il Manuale del Terzo Ordine e la rivista «Cristo in Tutto»: i testi della comunità IVE a Torino.",
+     "formazione.html", FORMAZIONE, "Formazione", "I libri, i manuali e i sussidi della comunità."),
     ("contatti.html", "Contatti — IVE a Torino",
      "Dove trovarci: via Baltimora 85, Torino. Email, canale WhatsApp e newsletter della comunità IVE a Torino.",
      "contatti.html", CONTATTI, "Contatti", "Via Baltimora 85, 10137 Torino."),
