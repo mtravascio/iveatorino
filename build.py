@@ -703,13 +703,14 @@ VIRTUS = [
 ]
 
 DOCS = [
+    ("esercizi-spirituali.pdf", "Spiritualità", "Esercizi Spirituali", "Il testo di Sant'Ignazio di Loyola: le annotazioni, le quattro settimane, le regole del discernimento.", 76),
     ("catechismo-maggiore-pio-x.pdf", "Catechismo", "Il Catechismo Maggiore di San Pio X", "Le quattro parti della dottrina cristiana: il Credo, l'orazione, i comandamenti, i sacramenti.", 127),
     ("guida-del-terziario.pdf", "Terzo Ordine", "Essere una nuova incarnazione del Verbo", "Manuale del Terzo Ordine Secolare dell'Istituto del Verbo Incarnato.", 55),
     ("rege-o-maria.pdf", "Mariologia", "Rege O Maria", "", 150),
 ]
 
 
-def doc_grid(items):
+def doc_grid(items, cols=3):
     """Schede PDF: dimensione calcolata dal file, non scritta a mano."""
     cards = []
     for fname, label, title, sub, pages in items:
@@ -725,7 +726,8 @@ def doc_grid(items):
             '        <a class="dl" href="assets/pdf/%s" target="_blank" rel="noopener">Apri il PDF</a>\n'
             '      </article>' % (label, title, sub_html, pages, size.replace(".", ","), fname)
         )
-    return '<div class="docs">\n' + "\n".join(cards) + "\n    </div>"
+    cls = 'docs' if cols == 3 else 'docs c%d' % cols
+    return '<div class="%s">\n' % cls + "\n".join(cards) + "\n    </div>"
 
 
 FORMAZIONE = f"""
@@ -753,7 +755,7 @@ FORMAZIONE = f"""
   <div class="wrap">
     <p class="eyebrow">Documenti</p>
     <h2 style="margin-bottom:34px">Manuali e sussidi</h2>
-    {doc_grid(DOCS)}
+    {doc_grid(DOCS, 2)}
     <p class="note" style="margin-top:26px">I testi sono pubblicati con il permesso dell'Istituto del Verbo Incarnato. Se un file non si apre o trovi un errore, scrivi a <a href="mailto:{MAIL}">{MAIL}</a>.</p>
   </div>
 </section>

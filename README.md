@@ -9,10 +9,10 @@ Stato aggiornato al **9 novembre 2026**.
 | | |
 |---|---|
 | Repository | https://github.com/mtravascio/iveatorino (pubblico) |
-| Sito | **https://www.iveatorino.it** — per ora serve in HTTP, il certificato HTTPS è in attesa |
+| Sito | **https://www.iveatorino.it** — HTTP e HTTPS, certificato Let's Encrypt con rinnovo automatico |
 | Anteprima GitHub | https://mtravascio.github.io/iveatorino/ (reindirizza al dominio) |
 | Dominio | `iveatorino.it`, DNS su Squarespace |
-| Pagine | 7: home, comunità, adorazione, orari, eventi, contatti, privacy |
+| Pagine | 8: home, comunità, adorazione, orari, eventi, formazione, contatti, privacy |
 
 ## Come funziona
 
@@ -31,16 +31,32 @@ docs/                ← è questa la cartella pubblicata da GitHub Pages
 ├── adorazione.html      adorazione e calendario
 ├── orari.html           messe, adorazione, confessioni, ufficio
 ├── eventi.html          appuntamenti
+├── formazione.html      collana Virtus, documenti, rivista
 ├── contatti.html        recapiti, mappa, newsletter
 ├── privacy.html         informativa
 ├── assets/css/style.css
-├── assets/img/          crest.png (stemma), loreto.jpg (Santa Casa), evento.jpg (locandina)
+├── assets/img/          crest.png, loreto.jpg, locandine, copertine della rivista
+├── assets/pdf/          i PDF serviti dalla pagina Formazione
 ├── CNAME                www.iveatorino.it — lo usa GitHub Pages, non cancellarlo
 └── .nojekyll            dice a GitHub di non processare i file con Jekyll
 ```
 
 Solo il contenuto di `docs/` finisce online: le note e lo script restano nel repository
 ma non sono visibili sul sito.
+
+## Aggiungere un documento
+
+1. Metti il PDF in `docs/assets/pdf/`, con un nome senza spazi: `virtus-21-titolo.pdf`.
+2. In `build.py` aggiungi una riga a `VIRTUS` (collana) o a `DOCS` (manuali): nome del file,
+   etichetta, titolo, sottotitolo, numero di pagine.
+3. `python3 build.py` — il peso in MB lo calcola da solo dal file.
+
+I PDF pesanti si comprimono prima con Ghostscript, senza toccare i testi:
+
+```bash
+gs -sDEVICE=pdfwrite -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH \
+   -sOutputFile=out.pdf originale.pdf
+```
 
 ## Modificare i testi
 

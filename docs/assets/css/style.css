@@ -218,6 +218,7 @@ ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:30px
 /* figure */
 /* ---------- formazione: schede PDF ---------- */
 .docs{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.docs.c2{grid-template-columns:repeat(2,1fr)}
 .doc{background:var(--paper);padding:28px 26px 24px;display:flex;flex-direction:column;transition:.2s}
 .doc:hover{background:#FFF9EC}
 .doc .n{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:0 0 10px}
@@ -286,7 +287,7 @@ footer .brand small{color:#9A8E7E}
   .hero .eyebrow{font-size:.66rem;letter-spacing:.11em}
   .hero .eyebrow::before{width:22px;margin-right:8px}
   .issues{grid-template-columns:1fr}
-  .docs{grid-template-columns:1fr}
+  .docs,.docs.c2{grid-template-columns:1fr}
   .twoup{max-width:none}
   section{padding:72px 0}
   .hero{grid-template-columns:1fr;min-height:0}
