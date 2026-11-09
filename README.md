@@ -12,7 +12,7 @@ Stato aggiornato al **9 novembre 2026**.
 | Sito | **https://www.iveatorino.it** — HTTP e HTTPS, certificato Let's Encrypt con rinnovo automatico |
 | Anteprima GitHub | https://mtravascio.github.io/iveatorino/ (reindirizza al dominio) |
 | Dominio | `iveatorino.it`, DNS su Squarespace |
-| Pagine | 8: home, comunità, adorazione, orari, eventi, formazione, contatti, privacy |
+| Pagine | 9: home, comunità, adorazione, preghiera, orari, eventi, formazione, contatti, privacy |
 
 ## Come funziona
 
@@ -29,6 +29,7 @@ docs/                ← è questa la cartella pubblicata da GitHub Pages
 ├── index.html           home
 ├── comunita.html        chi siamo
 ├── adorazione.html      adorazione e calendario
+├── preghiera.html       il Rosario in audio
 ├── orari.html           messe, adorazione, confessioni, ufficio
 ├── eventi.html          appuntamenti
 ├── formazione.html      collana Virtus, documenti, rivista
@@ -36,7 +37,10 @@ docs/                ← è questa la cartella pubblicata da GitHub Pages
 ├── privacy.html         informativa
 ├── assets/css/style.css
 ├── assets/img/          crest.png, loreto.jpg, locandine, copertine della rivista
-├── assets/pdf/          i PDF serviti dalla pagina Formazione
+├── assets/pdf/          i PDF della pagina Formazione
+├── assets/audio/        i quattro Rosari in MP3
+├── sitemap.xml          generata da build.py, per Google
+├── robots.txt           generato da build.py, rimanda alla sitemap
 ├── CNAME                www.iveatorino.it — lo usa GitHub Pages, non cancellarlo
 └── .nojekyll            dice a GitHub di non processare i file con Jekyll
 ```
@@ -57,6 +61,16 @@ I PDF pesanti si comprimono prima con Ghostscript, senza toccare i testi:
 gs -sDEVICE=pdfwrite -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH \
    -sOutputFile=out.pdf originale.pdf
 ```
+
+## Sitemap per Google
+
+`sitemap.xml` e `robots.txt` **non si scrivono a mano**: li rigenera `build.py` ad ogni
+build, con gli indirizzi assoluti in `https://` presi da `SITE_URL`. Quando aggiungi una
+pagina a `PAGES` finisce nella sitemap da sola.
+
+In Search Console si invia una volta sola: *Indicizzazione → Sitemap* →
+`https://www.iveatorino.it/sitemap.xml`. Se Google segnala errori, la prima cosa da
+controllare è che il file risponda 200 e non sia la pagina 404 del sito.
 
 ## Modificare i testi
 

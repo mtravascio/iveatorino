@@ -22,8 +22,9 @@ MAPS = "https://maps.google.com/?q=Via+Baltimora+85+10137+Torino"
 
 NAV = [
     ("index.html", "Home"),
-    ("comunita.html", "La comunità"),
+    ("comunita.html", "Comunità"),
     ("adorazione.html", "Adorazione"),
+    ("preghiera.html", "Preghiera"),
     ("orari.html", "Orari"),
     ("eventi.html", "Eventi"),
     ("formazione.html", "Formazione"),
@@ -434,6 +435,7 @@ ADORAZIONE = f"""
       </ol>
       <p class="note">Se non puoi più venire, cancella la prenotazione: quell'ora torna disponibile per qualcun altro.</p>
       <p><a class="btn btn-primary" href="{CAL}">Apri il calendario</a></p>
+      <p class="note">Durante l'ora di Adorazione puoi recitare il Rosario seguendo l'audio: <a href="preghiera.html">le quattro corone</a>.</p>
     </div>
     <aside class="sidecard">
       <p class="kicker">Orari</p>
@@ -784,6 +786,91 @@ FORMAZIONE = f"""
 </section>
 """
 
+ROSA = [
+    ("rosario-gaudiosi.mp3", "Misteri gaudiosi", "Lunedì e sabato", "26:13",
+     "Dall'Annunciazione al ritrovamento di Gesù nel tempio: la gioia degli inizi."),
+    ("rosario-luminosi.mp3", "Misteri luminosi", "Giovedì", "26:24",
+     "La vita pubblica del Signore: dal battesimo al Giordano all'istituzione dell'Eucaristia."),
+    ("rosario-dolorosi.mp3", "Misteri dolorosi", "Martedì e venerdì", "26:05",
+     "La Passione: dall'agonia nell'orto alla morte in croce."),
+    ("rosario-gloriosi.mp3", "Misteri gloriosi", "Mercoledì e domenica", "26:01",
+     "Dalla Risurrezione all'incoronazione di Maria: la vittoria che apre il cielo."),
+]
+
+
+def audio_rows(items):
+    """Righe con lettore audio: nessun preload, così la pagina resta leggera."""
+    out = []
+    for fname, title, days, dur, desc in items:
+        path = os.path.join(OUT, "assets", "audio", fname)
+        size = "%.1f MB" % (os.path.getsize(path) / 1048576.0)
+        out.append(
+            '      <article class="audio-row">\n'
+            '        <div>\n'
+            '          <p class="k">%s · %s</p>\n'
+            '          <h3>%s</h3>\n'
+            '          <p>%s</p>\n'
+            '        </div>\n'
+            '        <div class="player">\n'
+            '          <audio controls preload="none" src="assets/audio/%s"></audio>\n'
+            '          <p class="note">%s · <a href="assets/audio/%s" download>scarica l\'MP3</a></p>\n'
+            '        </div>\n'
+            '      </article>' % (title, dur, title, desc, fname, size.replace(".", ","), fname)
+        )
+    return '\n'.join(out)
+
+
+PREGHIERA = f"""
+<section class="tight">
+  <div class="wrap">
+    <div class="prose" style="max-width:74ch">
+      <p class="eyebrow">Preghiera</p>
+      <h2>Il Santo Rosario</h2>
+      <p class="lead">Le quattro corone, registrate per intero: misteri gaudiosi, luminosi, dolorosi e gloriosi. Un modo semplice per recitare il Rosario durante l'ora di Adorazione, o in famiglia la sera.</p>
+      <p>Si può ascoltare direttamente da questa pagina — l'audio parte con un clic, senza scaricare tutto in anticipo — oppure salvare il file e portarlo con sé, dove la connessione non arriva.</p>
+    </div>
+  </div>
+</section>
+
+<section class="hours">
+  <div class="wrap">
+    <p class="eyebrow">Le quattro corone</p>
+    <h2 style="margin-bottom:8px">I misteri di oggi</h2>
+    <p class="note" style="max-width:64ch;margin-bottom:18px">Ogni registrazione dura circa ventisei minuti. La tradizione assegna i misteri ai giorni della settimana; chi preferisce può seguirne altri.</p>
+    <div class="audio-list">
+{audio_rows(ROSA)}
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap split" style="align-items:start">
+    <div class="prose">
+      <p class="eyebrow">Come si recita</p>
+      <h2>Una corona, cinque misteri</h2>
+      <p>Si comincia con il segno della croce e il Credo, poi un Padre nostro, tre Ave Maria e il Gloria. Seguono i cinque misteri del giorno: per ciascuno si annuncia il mistero, si recita un Padre nostro, dieci Ave Maria e il Gloria. Si chiude con la Salve Regina e la preghiera per il Santo Padre.</p>
+      <p>Durante l'Adorazione del venerdì il Rosario si può recitare in chiesa, seguendo l'audio anche a bassa voce; in famiglia funziona bene la sera, quando tutti sono in casa.</p>
+      <p><a class="btn btn-line" href="{PRE}">Preghiere per i padri</a></p>
+    </div>
+    <aside class="sidecard">
+      <p class="kicker">In chiesa</p>
+      <dl>
+        <dt>Adorazione</dt><dd>venerdì 9:00 – 18:00</dd>
+        <dt>Primo giovedì</dt><dd>dalle 22:00 del giovedì alle 18:00 del venerdì</dd>
+        <dt>Dove</dt><dd>Maria Madre della Chiesa, via Baltimora 85</dd>
+      </dl>
+      <a class="btn btn-primary" style="width:100%;justify-content:center" href="adorazione.html">Calendario dell'Adorazione</a>
+    </aside>
+  </div>
+</section>
+
+<section class="hours tight">
+  <div class="wrap">
+    <p class="note">Registrazioni audio: Radio Maria. Se trovi un file che non si apre, scrivi a <a href="mailto:{MAIL}">{MAIL}</a>.</p>
+  </div>
+</section>
+"""
+
 PAGES = [
     ("index.html", "IVE a Torino — Amici e terziari dell'Istituto del Verbo Incarnato",
      "La comunità laicale di amici e terziari dell'Istituto del Verbo Incarnato a Torino: Adorazione eucaristica, orari della chiesa di Maria Madre della Chiesa, petizione per il ritorno dei padri.",
@@ -794,6 +881,9 @@ PAGES = [
     ("adorazione.html", "Adorazione eucaristica — IVE a Torino",
      "Orari e calendario dell'Adorazione eucaristica a Maria Madre della Chiesa, Torino: ogni venerdì dalle 9:00 alle 18:00, primo giovedì del mese.",
      "adorazione.html", ADORAZIONE, "Adorazione eucaristica", "Ogni venerdì il Santissimo è esposto dalle 9:00 alle 18:00."),
+    ("preghiera.html", "Preghiera — IVE a Torino",
+     "Il Santo Rosario in audio (misteri gaudiosi, luminosi, dolorosi e gloriosi) e le preghiere della comunità IVE a Torino.",
+     "preghiera.html", PREGHIERA, "Preghiera", "Il Rosario in audio, per l'Adorazione e per la famiglia."),
     ("orari.html", "Orari e Messe — IVE a Torino",
      "Orari di Sante Messe, Adorazione e confessioni della parrocchia Maria Madre della Chiesa, via Baltimora 85, Torino.",
      "orari.html", ORARI, "Orari e Messe", "Parrocchia Maria Madre della Chiesa, via Baltimora 85."),
@@ -811,13 +901,50 @@ PAGES = [
      "privacy.html", PRIVACY, None, None),
 ]
 
+SITE_URL = "https://www.iveatorino.it"
+
+
+def write_sitemap(pages):
+    """sitemap.xml valido secondo lo schema sitemaps.org 0.9."""
+    from datetime import date
+    today = date.today().isoformat()
+    out = ['<?xml version="1.0" encoding="UTF-8"?>',
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    for slug, title, desc, active, body, ht, hs in pages:
+        loc = SITE_URL + "/" if slug == "index.html" else SITE_URL + "/" + slug
+        if slug == "index.html":
+            freq, pri = "weekly", "1.0"
+        elif slug in ("privacy.html",):
+            freq, pri = "yearly", "0.3"
+        elif slug in ("contatti.html", "formazione.html", "preghiera.html"):
+            freq, pri = "monthly", "0.7"
+        else:
+            freq, pri = "monthly", "0.8"
+        out.append("  <url>")
+        out.append("    <loc>%s</loc>" % loc)
+        out.append("    <lastmod>%s</lastmod>" % today)
+        out.append("    <changefreq>%s</changefreq>" % freq)
+        out.append("    <priority>%s</priority>" % pri)
+        out.append("  </url>")
+    out.append("</urlset>")
+    with open(os.path.join(OUT, "sitemap.xml"), "w", encoding="utf-8") as fh:
+        fh.write("\n".join(out) + "\n")
+
+
+def write_robots():
+    with open(os.path.join(OUT, "robots.txt"), "w", encoding="utf-8") as fh:
+        fh.write("User-agent: *\nAllow: /\n\nSitemap: %s/sitemap.xml\n" % SITE_URL)
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     for slug, title, desc, active, body, ht, hs in PAGES:
         html_out = page(slug, title, desc, active, body, ht, hs)
         with open(os.path.join(OUT, slug), "w", encoding="utf-8") as fh:
             fh.write(html_out)
-    print("Generati:", ", ".join(p[0] for p in PAGES))
+    write_sitemap(PAGES)
+    write_robots()
+    print("Generati:", ", ".join(p[0] for p in PAGES), "+ sitemap.xml, robots.txt")
 
 if __name__ == "__main__":
     main()

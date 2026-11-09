@@ -236,6 +236,16 @@ ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:30px
 .twoup{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:44px;align-items:start;margin-top:38px;max-width:880px}
 .rivista{display:grid;grid-template-columns:320px 1fr;gap:56px;align-items:center}
 
+
+/* ---------- rosario in audio ---------- */
+.audio-list{border-top:1px solid var(--line);margin-top:20px}
+.audio-row{display:grid;grid-template-columns:1fr 360px;gap:44px;align-items:center;padding:30px 0;border-bottom:1px solid var(--line)}
+.audio-row .k{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:0 0 8px}
+.audio-row h3{font-size:1.55rem;margin:0 0 8px}
+.audio-row p{color:var(--muted);font-size:.95rem;margin:0}
+.audio-row .player audio{width:100%;height:44px;display:block}
+.audio-row .player .note{margin:10px 0 0;font-size:.82rem}
+
 figure{margin:0}
 figcaption{font-size:.8rem;color:var(--muted);margin-top:12px;letter-spacing:.03em}
 
@@ -262,6 +272,7 @@ footer .brand small{color:#9A8E7E}
   .door:last-child{border-bottom:none}
   .event{grid-template-columns:1fr;gap:34px}
   .event img{max-width:320px}
+  .audio-row{grid-template-columns:1fr;gap:18px}
   .docs{grid-template-columns:repeat(2,1fr)}
   .twoup{grid-template-columns:1fr;max-width:420px}
   .rivista{grid-template-columns:1fr;gap:34px}
