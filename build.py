@@ -91,7 +91,7 @@ FOOTER = f"""<footer>
           <img src="assets/img/crest.png" alt="" style="width:40px;height:40px">
           <span><b>IVE a Torino</b><small>Istituto del Verbo Incarnato</small></span>
         </a>
-        <p style="margin-top:18px;max-width:34ch">Comunità dell'Istituto del Verbo Incarnato presso la parrocchia di Maria Madre della Chiesa, Torino.</p>
+        <p style="margin-top:18px;max-width:34ch">Amici e terziari dell'Istituto del Verbo Incarnato a Torino. La chiesa di riferimento è Maria Madre della Chiesa, via Baltimora 85.</p>
       </div>
       <div>
         <h4>Dove siamo</h4>
@@ -142,8 +142,8 @@ HOME = f"""
   <div class="hero-copy">
     <img class="hero-crest" src="assets/img/crest.png" alt="Stemma dell'Istituto del Verbo Incarnato">
     <p class="eyebrow">Torino · Maria Madre della Chiesa</p>
-    <h1>Una casa, una famiglia, una missione</h1>
-    <p>La comunità dell'Istituto del Verbo Incarnato a Torino: l'Adorazione eucaristica che non si interrompe, la vita della parrocchia, i giovani in formazione e i fedeli che chiedono ai loro padri di restare.</p>
+    <h1>Una comunità che resta</h1>
+    <p>Amici e terziari dell'Istituto del Verbo Incarnato a Torino: l'Adorazione eucaristica che continua ogni venerdì, la preghiera per i padri, la petizione perché tornino nella diocesi. Dopo la loro partenza, la comunità non si è sciolta.</p>
     <div class="actions">
       <a class="btn btn-primary" href="orari.html">Orari e Adorazione</a>
       <a class="btn btn-ghost" href="{PET}">La Petizione</a>
@@ -182,9 +182,10 @@ HOME = f"""
   <div class="wrap split">
     <div>
       <p class="eyebrow">Chi siamo</p>
-      <h2>Una presenza viva nel quartiere</h2>
-      <p class="lead">Siamo la comunità che si raduna attorno ai padri dell'Istituto del Verbo Incarnato e alla parrocchia di Maria Madre della Chiesa, in via Baltimora. La comunità è affidata a Maria Santissima di Loreto, la cui Santa Casa è il segno dell'Incarnazione. Qui il carisma prende la forma di cose semplici: l'Eucaristia esposta ogni giorno, i ragazzi che crescono, le famiglie che si incontrano, i giovani che si preparano al sacerdozio.</p>
-      <p>Questo sito raccoglie gli orari, le iniziative e i canali con cui restare in contatto. Se è la prima volta che ci visiti, comincia dall'Adorazione: è il cuore di tutto il resto.</p>
+      <h2>Laici legati all'Istituto del Verbo Incarnato</h2>
+      <p class="lead">Siamo amici e terziari dell'IVE: laici — famiglie, giovani, professionisti — che si riconoscono nel carisma dell'Incarnazione e che hanno condiviso per anni la vita della parrocchia di Maria Madre della Chiesa, in via Baltimora. La comunità è affidata a Maria Santissima di Loreto, la cui Santa Casa è il segno dell'Incarnazione.</p>
+      <p>Da settembre 2025 i padri non sono più a Torino. La comunità non si è sciolta: l'Adorazione del venerdì continua, un gruppo prega per i sacerdoti e i seminaristi dell'Istituto e i fedeli laici hanno chiesto al Cardinale Repole che la Famiglia Religiosa torni nella diocesi.</p>
+      <p>Questo sito raccoglie gli orari della chiesa, le iniziative e i canali con cui restare in contatto. Se è la prima volta che ci incontri, comincia dall'Adorazione: è il cuore di tutto il resto.</p>
       <a class="btn btn-line" href="comunita.html">Conosci la comunità</a>
     </div>
     <aside class="identity">
@@ -217,13 +218,13 @@ HOME = f"""
       <a class="door" href="{PET}">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16M6 20V9l6-4 6 4v11"/><path d="M10 20v-5h4v5"/></svg>
         <h3>La Petizione</h3>
-        <p>L'appello dei fedeli perché i padri dell'IVE restino a Torino: il testo, le firme, gli articoli.</p>
+        <p>L'appello dei fedeli laici perché la Famiglia Religiosa dell'IVE torni nella diocesi di Torino: il testo, le firme, gli articoli.</p>
         <span class="go">Leggi e firma</span>
       </a>
       <a class="door" href="{PRE}">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/></svg>
         <h3>Preghiere per i Padri</h3>
-        <p>Sussidi e preghiere per sostenere spiritualmente i sacerdoti e i seminaristi della comunità.</p>
+        <p>Sussidi e preghiere per sostenere spiritualmente i sacerdoti e i seminaristi dell'Istituto.</p>
         <span class="go">Materiale e preghiere</span>
       </a>
     </div>
@@ -290,8 +291,8 @@ HOME = f"""
 <section class="band tight" id="petizione">
   <div class="wrap">
     <div>
-      <h2>I padri restino a Torino</h2>
-      <p>I fedeli hanno chiesto al Cardinale Arcivescovo il ritorno della Famiglia Religiosa dell'IVE. Puoi leggere il testo, le testimonianze e aggiungere la tua firma.</p>
+      <h2>I padri tornino a Torino</h2>
+      <p>Dopo la partenza della Famiglia Religiosa dell'IVE, i fedeli laici hanno chiesto al Cardinale Repole il suo ritorno nella diocesi. Puoi leggere il testo, le testimonianze e aggiungere la tua firma.</p>
     </div>
     <div class="actions">
       <a class="btn btn-white" href="{PET}">Firma la petizione</a>
@@ -324,25 +325,25 @@ COMUNITA = f"""
   <div class="wrap split" style="align-items:start">
     <div class="prose">
       <p class="eyebrow">Chi siamo</p>
-      <h2>Una famiglia religiosa, una parrocchia, un quartiere</h2>
-      <p class="lead">L'Istituto del Verbo Incarnato è una famiglia religiosa della Chiesa cattolica, presente in diversi paesi, che a Torino anima la parrocchia di Maria Madre della Chiesa.</p>
-      <p>Il nome dice il programma: il Verbo si è fatto carne. Per questo la vita della comunità passa dalle cose concrete — l'Eucaristia, le persone, il lavoro, la casa — e non da un'idea astratta di spiritualità. Chi entra in chiesa in via Baltimora trova l'Adorazione esposta, i banchi, i ragazzi del catechismo, i giovani in formazione che studiano e pregano.</p>
-      <p>Accanto alla parrocchia vivono i padri dell'Istituto e i seminaristi: celebrano, confessano, accompagnano le famiglie, insegnano. È una presenza radicata nella vita del quartiere.</p>
+      <h2>Una famiglia religiosa, e i laici che la portano nel cuore</h2>
+      <p class="lead">L'Istituto del Verbo Incarnato è una famiglia religiosa della Chiesa cattolica, presente in diversi paesi. A Torino ha animato per anni la parrocchia di Maria Madre della Chiesa: qui i padri hanno celebrato, confessato, accompagnato famiglie e giovani.</p>
+      <p>Il nome dice il programma: il Verbo si è fatto carne. Per questo la spiritualità dell'Istituto passa dalle cose concrete — l'Eucaristia, le persone, il lavoro, la casa — e non da un'idea astratta. È la stessa spiritualità che i terziari cercano di vivere nel mondo, nelle proprie famiglie e nei propri lavori.</p>
+      <p>Da settembre 2025 i padri non sono più a Torino: la Famiglia Religiosa ha lasciato la diocesi. La comunità laicale che si era formata attorno a loro non si è sciolta. Continua a ritrovarsi, tiene viva l'Adorazione del venerdì, prega per i sacerdoti e i seminaristi dell'Istituto e chiede al Cardinale Repole che possano tornare.</p>
       <h3>Che cosa trovi qui</h3>
       <ul class="ticks">
-        <li>Le Sante Messe feriali e festive, con gli orari aggiornati</li>
-        <li>L'Adorazione eucaristica, con il calendario e i turni</li>
-        <li>Le confessioni e il colloquio con un sacerdote</li>
-        <li>Le iniziative culturali e spirituali aperte a tutti</li>
-        <li>La preghiera e il sostegno ai padri della comunità</li>
+        <li>L'Adorazione eucaristica del venerdì, con il calendario e i turni</li>
+        <li>Gli orari della chiesa di Maria Madre della Chiesa</li>
+        <li>La preghiera per i padri e i seminaristi dell'Istituto</li>
+        <li>Gli incontri e le iniziative aperte a tutti</li>
+        <li>La petizione dei fedeli laici per il ritorno dell'IVE in diocesi</li>
       </ul>
     </div>
     <aside class="sidecard">
       <p class="kicker">In breve</p>
       <dl>
         <dt>Dove</dt><dd>Via Baltimora 85, 10137 Torino</dd>
-        <dt>Chi</dt><dd>Istituto del Verbo Incarnato (IVE)</dd>
-        <dt>Parrocchia</dt><dd>Maria Madre della Chiesa</dd>
+        <dt>Chi</dt><dd>Amici e terziari dell'Istituto del Verbo Incarnato</dd>
+        <dt>Chiesa</dt><dd>Maria Madre della Chiesa</dd>
         <dt>Contatti</dt><dd><a href="mailto:{MAIL}">{MAIL}</a></dd>
         <dt>Canale</dt><dd><a href="{WA}">WhatsApp</a></dd>
       </dl>
@@ -379,7 +380,7 @@ COMUNITA = f"""
 <section class="tight">
   <div class="wrap">
     <p class="eyebrow">La vita di ogni giorno</p>
-    <h2 style="margin-bottom:40px">Tre cose che ci definiscono</h2>
+    <h2 style="margin-bottom:40px">Tre cose che ci tengono insieme</h2>
     <div class="doors">
       <div class="door">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17M3.5 12h17"/></svg>
@@ -389,12 +390,12 @@ COMUNITA = f"""
       <div class="door">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 4v6c0 4-3 7-7 8-4-1-7-4-7-8V7z"/></svg>
         <h3>La formazione</h3>
-        <p>Seminaristi e giovani che studiano, lavorano e si preparano al sacerdozio dentro la comunità.</p>
+        <p>La <i>Guida del terziario</i>, gli incontri e lo studio: la vocazione laicale dentro il carisma dell'Incarnazione.</p>
       </div>
       <div class="door">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10l8-5 8 5v10z"/><path d="M9 20v-6h6v6"/></svg>
-        <h3>La parrocchia</h3>
-        <p>Catechismo, famiglie, giovani: la vita ordinaria di una parrocchia di quartiere.</p>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 6.5h17v11h-17z"/><path d="M3.5 7l8.5 6 8.5-6"/></svg>
+        <h3>La richiesta</h3>
+        <p>La petizione al Cardinale Repole perché la Famiglia Religiosa torni nella diocesi di Torino.</p>
       </div>
     </div>
   </div>
@@ -408,7 +409,7 @@ ADORAZIONE = f"""
       <p class="eyebrow">Adorazione eucaristica</p>
       <h2>Il cuore della giornata</h2>
       <p class="lead">Ogni venerdì la chiesa resta aperta dalle 9:00 alle 18:00 con il Santissimo esposto; una volta al mese l'Adorazione si prolunga dalla sera del giovedì fino al venerdì pomeriggio.</p>
-      <p>Per coprire tutte le ore serve qualcuno in chiesa in ogni momento. Si può prenotare un'ora — o più — dal calendario online: è il modo più semplice per garantire che l'Adorazione non si interrompa.</p>
+      <p>Per questa comunità l'Adorazione del venerdì è il punto fermo della settimana. Per coprire tutte le ore serve qualcuno in chiesa in ogni momento: si può prenotare un'ora — o più — dal calendario online.</p>
       <h3>Come funziona</h3>
       <ol class="steps">
         <li><b>Scegli l'ora</b> sul calendario e vedi subito quali sono ancora libere.</li>
@@ -619,7 +620,7 @@ PRIVACY = f"""
     <h1 style="font-size:2.4rem">Privacy e cookie</h1>
     <p class="lead">Questa pagina spiega quali dati raccogliamo attraverso il sito e come vengono trattati.</p>
     <h3>Titolare del trattamento</h3>
-    <p>IVE a Torino — Parrocchia Maria Madre della Chiesa, via Baltimora 85, 10137 Torino. Contatto: <a href="mailto:{MAIL}">{MAIL}</a>.</p>
+    <p>Amici e terziari dell'Istituto del Verbo Incarnato a Torino — chiesa di Maria Madre della Chiesa, via Baltimora 85, 10137 Torino. Contatto: <a href="mailto:{MAIL}">{MAIL}</a>.</p>
     <h3>Quali dati raccogliamo</h3>
     <ul class="ticks">
       <li><b>Newsletter</b>: l'indirizzo email che ci comunichi iscrivendoti al gruppo Google «IVE a Torino». Serve solo a inviarti gli aggiornamenti; puoi cancellarti in qualsiasi momento.</li>
@@ -636,12 +637,12 @@ PRIVACY = f"""
 """
 
 PAGES = [
-    ("index.html", "IVE a Torino — Comunità dell'Istituto del Verbo Incarnato",
-     "La comunità dell'Istituto del Verbo Incarnato a Torino: Adorazione eucaristica, orari della parrocchia Maria Madre della Chiesa, eventi e contatti.",
+    ("index.html", "IVE a Torino — Amici e terziari dell'Istituto del Verbo Incarnato",
+     "La comunità laicale di amici e terziari dell'Istituto del Verbo Incarnato a Torino: Adorazione eucaristica, orari della chiesa di Maria Madre della Chiesa, petizione per il ritorno dei padri.",
      "index.html", HOME, None, None),
     ("comunita.html", "La comunità — IVE a Torino",
-     "Chi è l'Istituto del Verbo Incarnato a Torino: la famiglia religiosa, la parrocchia Maria Madre della Chiesa, la formazione dei seminaristi.",
-     "comunita.html", COMUNITA, "La comunità", "Una famiglia religiosa, una parrocchia, un quartiere."),
+     "Gli amici e i terziari dell'Istituto del Verbo Incarnato a Torino: chi sono, cosa fanno dopo la partenza dei padri, perché chiedono il loro ritorno nella diocesi.",
+     "comunita.html", COMUNITA, "La comunità", "Amici e terziari dell'IVE, dopo la partenza dei padri."),
     ("adorazione.html", "Adorazione eucaristica — IVE a Torino",
      "Orari e calendario dell'Adorazione eucaristica a Maria Madre della Chiesa, Torino: ogni venerdì dalle 9:00 alle 18:00, primo giovedì del mese.",
      "adorazione.html", ADORAZIONE, "Adorazione eucaristica", "Ogni venerdì il Santissimo è esposto dalle 9:00 alle 18:00."),

@@ -1,6 +1,7 @@
 # IVE a Torino — sito
 
-Sito della comunità dell'Istituto del Verbo Incarnato a Torino.
+Sito degli amici e dei terziari dell'Istituto del Verbo Incarnato a Torino: la comunità laicale
+che continua dopo la partenza dei padri (settembre 2025).
 Stato aggiornato al **9 novembre 2026**.
 
 ## Dov'è, adesso

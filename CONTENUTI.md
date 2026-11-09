@@ -7,17 +7,18 @@ punto dice **cosa manca**, **dove si mette** e **chi lo può decidere**.
 
 ## 1. La comunità (pagina `comunita.html`)
 
-Oggi il testo è volutamente generico: dice cosa è l'IVE e come vive la parrocchia, ma
-non racconta la storia torinese. Mancano:
+Il testo oggi dice l'essenziale: l'IVE, gli anni torinesi, la partenza dei padri a
+settembre 2025, la comunità laicale che continua. Restano da aggiungere:
 
-- da quando l'Istituto è a Torino e chi lo ha portato;
-- i nomi dei padri e dei seminaristi che ci sono stati e che ci sono (con il loro consenso);
-- due o tre fatti concreti: la scuola parentale, i campi estivi, le ordinazioni
-  sacerdotali, i lavori in chiesa;
+- l'anno in cui i padri sono arrivati a Torino e chi li ha chiamati;
+- i nomi di chi ha guidato la comunità e dei terziari storici (con il loro consenso);
+- due o tre fatti concreti: la scuola parentale, i campi, le ordinazioni sacerdotali,
+  i lavori in chiesa, le giornate di ritiro;
+- come si diventa terziari oggi, senza i padri in diocesi: chi accompagna, dove si va;
 - una foto di gruppo, se esiste.
 
-Chi lo decide: il superiore della comunità. Il testo si scrive nella costante
-`COMUNITA` dentro `build.py`.
+Chi lo decide: il gruppo di coordinamento degli amici e dei terziari. Il testo si
+scrive nella costante `COMUNITA` dentro `build.py`.
 
 ## 2. Orari (pagine `orari.html`, `adorazione.html`, home)
 
