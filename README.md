@@ -22,26 +22,32 @@ toccata dalla generazione.
 ```
 build.py             testi e struttura (unica fonte di verità)
 publish.sh           rigenera, committa e pubblica su GitHub
-index.html           home
-comunita.html        chi siamo
-adorazione.html      adorazione e calendario
-orari.html           messe, adorazione, confessioni, ufficio
-eventi.html          appuntamenti
-contatti.html        recapiti, mappa, newsletter
-privacy.html         informativa
-assets/css/style.css
-assets/img/          crest.png (stemma), evento.jpg (locandina)
-CNAME                www.iveatorino.it — lo usa GitHub Pages, non cancellarlo
-.nojekyll            dice a GitHub di non processare i file con Jekyll
+README.md            questo file
+CONTENUTI.md         cosa manca, pagina per pagina
+docs/                ← è questa la cartella pubblicata da GitHub Pages
+├── index.html           home
+├── comunita.html        chi siamo
+├── adorazione.html      adorazione e calendario
+├── orari.html           messe, adorazione, confessioni, ufficio
+├── eventi.html          appuntamenti
+├── contatti.html        recapiti, mappa, newsletter
+├── privacy.html         informativa
+├── assets/css/style.css
+├── assets/img/          crest.png (stemma), evento.jpg (locandina)
+├── CNAME                www.iveatorino.it — lo usa GitHub Pages, non cancellarlo
+└── .nojekyll            dice a GitHub di non processare i file con Jekyll
 ```
+
+Solo il contenuto di `docs/` finisce online: le note e lo script restano nel repository
+ma non sono visibili sul sito.
 
 ## Modificare i testi
 
 1. Apri `build.py` e cerca il testo da cambiare: sono tutti in chiaro, in italiano.
 2. `python3 build.py`
-3. Guarda il risultato aprendo `index.html`, poi `./publish.sh "cosa hai cambiato"`.
+3. Guarda il risultato aprendo `docs/index.html`, poi `./publish.sh "cosa hai cambiato"`.
 
-**Attenzione:** puoi anche modificare direttamente gli `.html`, ma il successivo
+**Attenzione:** puoi anche modificare direttamente gli `.html` dentro `docs/`, ma il successivo
 `python3 build.py` li sovrascrive. O usi il generatore, o lavori solo sugli HTML, non
 entrambi.
 
@@ -65,7 +71,7 @@ Si aggiunge una costante con il contenuto, una voce in `PAGES` e una in `NAV`; p
 
 ### Aggiungere una foto
 
-1. Metti il file in `assets/img/` — orizzontale, almeno 2000 px di larghezza, JPG sotto i 300 KB.
+1. Metti il file in `docs/assets/img/` — orizzontale, almeno 2000 px, JPG sotto i 300 KB.
 2. Richiamala dove serve in `build.py`:
    `<img src="assets/img/nome.jpg" alt="descrizione vera della foto">`
 3. L'`alt` non è un dettaglio: serve a chi non vede l'immagine e ai motori di ricerca.

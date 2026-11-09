@@ -3,12 +3,13 @@
 
 Uso:  python3 build.py      (oppure ./publish.sh per pubblicare)
 
-Scrive index.html e le altre pagine nella stessa cartella. Le immagini e il CSS
-stanno in assets/ e NON vengono toccati: si modificano direttamente.
+Scrive le pagine in docs/, che è la cartella pubblicata da GitHub Pages.
+Immagini e CSS stanno in docs/assets/ e NON vengono toccati: si modificano lì.
 """
 import os
 
 BASE = os.path.dirname(os.path.abspath(__file__))
+OUT = os.path.join(BASE, "docs")   # cartella pubblicata da GitHub Pages
 
 SITE = "IVE a Torino"
 WA = "https://whatsapp.com/channel/0029Vb6V2S27Noa7Re3MLe0u"
@@ -639,11 +640,10 @@ PAGES = [
 ]
 
 def main():
-    os.makedirs(os.path.join(BASE, "assets", "css"), exist_ok=True)
-    os.makedirs(os.path.join(BASE, "assets", "img"), exist_ok=True)
+    os.makedirs(OUT, exist_ok=True)
     for slug, title, desc, active, body, ht, hs in PAGES:
         html_out = page(slug, title, desc, active, body, ht, hs)
-        with open(os.path.join(BASE, slug), "w", encoding="utf-8") as fh:
+        with open(os.path.join(OUT, slug), "w", encoding="utf-8") as fh:
             fh.write(html_out)
     print("Generati:", ", ".join(p[0] for p in PAGES))
 
