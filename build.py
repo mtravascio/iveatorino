@@ -807,28 +807,32 @@ def audio_rows(items):
         out.append(
             '      <article class="audio-row">\n'
             '        <div>\n'
-            '          <p class="k">%s · %s</p>\n'
+            '          <p class="k">%s</p>\n'
             '          <h3>%s</h3>\n'
             '          <p>%s</p>\n'
             '        </div>\n'
             '        <div class="player">\n'
-            '          <audio controls preload="none" src="assets/audio/%s"></audio>\n'
-            '          <p class="note">%s · <a href="assets/audio/%s" download>scarica l\'MP3</a></p>\n'
+            '          <audio controls preload="metadata" src="assets/audio/%s"></audio>\n'
+            '          <p class="note">%s · %s · <a href="assets/audio/%s" download>scarica l\'MP3</a></p>\n'
             '        </div>\n'
-            '      </article>' % (title, dur, title, desc, fname, size.replace(".", ","), fname)
+            '      </article>' % (days, title, desc, fname, dur, size.replace(".", ","), fname)
         )
     return '\n'.join(out)
 
 
 PREGHIERA = f"""
 <section class="tight">
-  <div class="wrap">
-    <div class="prose" style="max-width:74ch">
+  <div class="wrap split" style="align-items:center">
+    <div class="prose">
       <p class="eyebrow">Preghiera</p>
       <h2>Il Santo Rosario</h2>
       <p class="lead">Le quattro corone, registrate per intero: misteri gaudiosi, luminosi, dolorosi e gloriosi. Un modo semplice per recitare il Rosario durante l'ora di Adorazione, o in famiglia la sera.</p>
       <p>Si può ascoltare direttamente da questa pagina — l'audio parte con un clic, senza scaricare tutto in anticipo — oppure salvare il file e portarlo con sé, dove la connessione non arriva.</p>
     </div>
+    <figure class="photo">
+      <img src="assets/img/rosario.jpg" alt="Un rosario in legno d'oliva con la croce di Gerusalemme, appoggiato su una superficie scura">
+      <figcaption>Rosario in legno d'oliva. Foto: Kaboompics — Pexels</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -849,6 +853,13 @@ PREGHIERA = f"""
       <p class="eyebrow">Come si recita</p>
       <h2>Una corona, cinque misteri</h2>
       <p>Si comincia con il segno della croce e il Credo, poi un Padre nostro, tre Ave Maria e il Gloria. Seguono i cinque misteri del giorno: per ciascuno si annuncia il mistero, si recita un Padre nostro, dieci Ave Maria e il Gloria. Si chiude con la Salve Regina e la preghiera per il Santo Padre.</p>
+      <p>La tradizione distribuisce i misteri sui giorni della settimana:</p>
+      <ul class="ticks">
+        <li><b>Lunedì e sabato</b> — misteri gaudiosi</li>
+        <li><b>Martedì e venerdì</b> — misteri dolorosi</li>
+        <li><b>Mercoledì e domenica</b> — misteri gloriosi</li>
+        <li><b>Giovedì</b> — misteri luminosi</li>
+      </ul>
       <p>Durante l'Adorazione del venerdì il Rosario si può recitare in chiesa, seguendo l'audio anche a bassa voce; in famiglia funziona bene la sera, quando tutti sono in casa.</p>
       <p><a class="btn btn-line" href="{PRE}">Preghiere per i padri</a></p>
     </div>
