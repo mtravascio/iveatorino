@@ -47,6 +47,12 @@ ma non sono visibili sul sito.
 2. `python3 build.py`
 3. Guarda il risultato aprendo `docs/index.html`, poi `./publish.sh "cosa hai cambiato"`.
 
+Per vedere il sito come sarà online, con i link funzionanti:
+
+```bash
+cd docs && python3 -m http.server 8080    # poi http://localhost:8080
+```
+
 **Attenzione:** puoi anche modificare direttamente gli `.html` dentro `docs/`, ma il successivo
 `python3 build.py` li sovrascrive. O usi il generatore, o lavori solo sugli HTML, non
 entrambi.
