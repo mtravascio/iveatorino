@@ -38,7 +38,7 @@ docs/                ← è questa la cartella pubblicata da GitHub Pages
 ├── assets/css/style.css
 ├── assets/img/          crest.png, loreto.jpg, locandine, copertine della rivista
 ├── assets/pdf/          i PDF della pagina Formazione
-├── assets/audio/        i quattro Rosari in MP3
+├── assets/audio/        i quattro Rosari in MP3 (Radio Maria, pubblicati su autorizzazione)
 ├── sitemap.xml          generata da build.py, per Google
 ├── robots.txt           generato da build.py, rimanda alla sitemap
 ├── CNAME                www.iveatorino.it — lo usa GitHub Pages, non cancellarlo
