@@ -1,0 +1,651 @@
+#!/usr/bin/env python3
+"""Genera le pagine del sito IVE a Torino.
+
+Uso:  python3 build.py      (oppure ./publish.sh per pubblicare)
+
+Scrive index.html e le altre pagine nella stessa cartella. Le immagini e il CSS
+stanno in assets/ e NON vengono toccati: si modificano direttamente.
+"""
+import os
+
+BASE = os.path.dirname(os.path.abspath(__file__))
+
+SITE = "IVE a Torino"
+WA = "https://whatsapp.com/channel/0029Vb6V2S27Noa7Re3MLe0u"
+CAL = ("https://script.google.com/macros/s/"
+       "AKfycbzdeOyxCEVWRphI1P3eCbvoeGcSKrlUnJ_9xuvQpjoVHb_Cqe-H3EEqznvLJ4WXOYSK4A/exec")
+PET = "https://petizione.iveatorino.it/"
+PRE = "https://preghiere.iveatorino.it/"
+MAIL = "info@iveatorino.it"
+MAPS = "https://maps.google.com/?q=Via+Baltimora+85+10137+Torino"
+
+NAV = [
+    ("index.html", "Home"),
+    ("comunita.html", "La comunità"),
+    ("adorazione.html", "Adorazione"),
+    ("orari.html", "Orari"),
+    ("eventi.html", "Eventi"),
+    ("contatti.html", "Contatti"),
+]
+
+HEAD = """<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<meta name="description" content="{desc}">
+<link rel="canonical" href="https://www.iveatorino.it/{slug}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="IVE a Torino">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{desc}">
+<meta property="og:image" content="https://www.iveatorino.it/assets/img/crest.png">
+<meta name="theme-color" content="#7C2434">
+<link rel="icon" href="assets/img/crest.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Salta al contenuto</a>
+"""
+
+TOPBAR = f"""<div class="topbar">
+  <div class="wrap">
+    <div>Parrocchia Maria Madre della Chiesa <span class="dot">·</span><span class="hide-s">Via Baltimora 85, Torino</span></div>
+    <div><a href="{MAPS}" target="_blank" rel="noopener">Come arrivare</a><span class="dot">·</span><a href="mailto:{MAIL}">{MAIL}</a></div>
+  </div>
+</div>
+"""
+
+def header(active):
+    links = "".join(
+        f'<a href="{href}"{" class=\"on\"" if href == active else ""}>{label}</a>'
+        for href, label in NAV
+    )
+    return f"""<header>
+  <div class="wrap nav">
+    <a class="brand" href="index.html">
+      <img src="assets/img/crest.png" alt="Stemma dell'Istituto del Verbo Incarnato">
+      <span><b>IVE a Torino</b><small>Istituto del Verbo Incarnato</small></span>
+    </a>
+    <button class="burger" aria-label="Apri il menu" aria-expanded="false" onclick="const m=document.getElementById('menu');m.classList.toggle('open');this.setAttribute('aria-expanded',m.classList.contains('open'))">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="links" id="menu">
+      {links}
+      <a class="cta" href="{WA}">Canale WhatsApp</a>
+    </nav>
+  </div>
+</header>
+"""
+
+FOOTER = f"""<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="index.html">
+          <img src="assets/img/crest.png" alt="" style="width:40px;height:40px">
+          <span><b>IVE a Torino</b><small>Istituto del Verbo Incarnato</small></span>
+        </a>
+        <p style="margin-top:18px;max-width:34ch">Comunità dell'Istituto del Verbo Incarnato presso la parrocchia di Maria Madre della Chiesa, Torino.</p>
+      </div>
+      <div>
+        <h4>Dove siamo</h4>
+        <ul>
+          <li>Via Baltimora 85<br>10137 Torino</li>
+          <li><a href="{MAPS}" target="_blank" rel="noopener">Indicazioni stradali</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Link utili</h4>
+        <ul>
+          <li><a href="{PET}">Petizione</a></li>
+          <li><a href="{PRE}">Preghiere per i Padri</a></li>
+          <li><a href="https://app.regeomaria.net">Le nostre app</a></li>
+          <li><a href="privacy.html">Privacy e cookie</a></li>
+          <li><a href="mailto:{MAIL}">{MAIL}</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <div>© 2026 IVE a Torino</div>
+      <div>Via Baltimora 85 · 10137 Torino</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
+"""
+
+def page(slug, title, desc, active, body, hero_title=None, hero_sub=None):
+    out = HEAD.format(title=title, desc=desc, slug=slug)
+    out += TOPBAR + header(active) + "<main id=\"main\">\n"
+    if hero_title:
+        out += f"""<div class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">IVE a Torino</p>
+    <h1>{hero_title}</h1>
+    {f'<p class="sub">{hero_sub}</p>' if hero_sub else ''}
+  </div>
+</div>
+"""
+    out += body + "\n</main>\n" + FOOTER
+    return out
+
+
+HOME = f"""
+<div class="hero" id="top">
+  <div class="wrap">
+    <img class="hero-crest" src="assets/img/crest.png" alt="Stemma dell'Istituto del Verbo Incarnato">
+    <p class="eyebrow">Torino · Maria Madre della Chiesa</p>
+    <h1>Una casa, una famiglia, una missione</h1>
+    <p>La comunità dell'Istituto del Verbo Incarnato a Torino: l'Adorazione eucaristica che non si interrompe, la vita della parrocchia, i giovani in formazione e i fedeli che chiedono ai loro padri di restare.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="orari.html">Orari e Adorazione</a>
+      <a class="btn btn-ghost" href="{PET}">La Petizione</a>
+    </div>
+  </div>
+</div>
+
+<div class="facts">
+  <div class="wrap">
+    <div class="card">
+      <div class="fact">
+        <div class="k">Adorazione eucaristica</div>
+        <p class="v">Ogni venerdì<br>9:00 – 18:00</p>
+        <div class="n">Primo giovedì del mese: dalle 22:00 alla sera del venerdì</div>
+      </div>
+      <div class="fact">
+        <div class="k">Sante Messe</div>
+        <p class="v">18:30 feriale<br>10:30 e 18:30 domenica</p>
+        <div class="n">Confessioni 17:45 – 18:20</div>
+      </div>
+      <div class="fact">
+        <div class="k">Prossimo appuntamento</div>
+        <p class="v">«L'universo:<br>caso o progetto?»</p>
+        <div class="n">Venerdì 13 novembre, ore 21:00</div>
+        <a class="more" href="eventi.html">Tutti gli eventi</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="comunita">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">Chi siamo</p>
+      <h2>Una presenza viva nel quartiere</h2>
+      <p class="lead">Siamo la comunità che si raduna attorno ai padri dell'Istituto del Verbo Incarnato e alla parrocchia di Maria Madre della Chiesa, in via Baltimora. Qui il carisma dell'Incarnazione prende la forma di cose semplici: l'Eucaristia esposta ogni giorno, i ragazzi che crescono, le famiglie che si incontrano, i giovani che si preparano al sacerdozio.</p>
+      <p>Questo sito raccoglie gli orari, le iniziative e i canali con cui restare in contatto. Se è la prima volta che ci visiti, comincia dall'Adorazione: è il cuore di tutto il resto.</p>
+      <a class="btn btn-line" href="comunita.html">Conosci la comunità</a>
+    </div>
+    <aside class="identity">
+      <img class="identity-mark" src="assets/img/crest.png" alt="Stemma dell'Istituto del Verbo Incarnato">
+      <p class="kicker">La chiesa</p>
+      <h3>Maria Madre della Chiesa</h3>
+      <p class="addr">Via Baltimora 85<br>10137 Torino</p>
+      <hr>
+      <dl>
+        <dt>Adorazione</dt><dd>venerdì 9:00 – 18:00</dd>
+        <dt>Messe</dt><dd>18:30 · domenica 10:30 e 18:30</dd>
+        <dt>Confessioni</dt><dd>17:45 – 18:20</dd>
+      </dl>
+      <a class="btn btn-line" href="contatti.html">Come arrivare</a>
+    </aside>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap">
+    <p class="eyebrow">Tre porte d'ingresso</p>
+    <h2 style="margin-bottom:44px">Da dove cominciare</h2>
+    <div class="doors">
+      <a class="door" href="adorazione.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17M3.5 12h17"/></svg>
+        <h3>Adorazione</h3>
+        <p>Il calendario delle ore di adorazione e la prenotazione dei turni, aggiornati ogni mese.</p>
+        <span class="go">Calendario e turni</span>
+      </a>
+      <a class="door" href="{PET}">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16M6 20V9l6-4 6 4v11"/><path d="M10 20v-5h4v5"/></svg>
+        <h3>La Petizione</h3>
+        <p>L'appello dei fedeli perché i padri dell'IVE restino a Torino: il testo, le firme, gli articoli.</p>
+        <span class="go">Leggi e firma</span>
+      </a>
+      <a class="door" href="{PRE}">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/></svg>
+        <h3>Preghiere per i Padri</h3>
+        <p>Sussidi e preghiere per sostenere spiritualmente i sacerdoti e i seminaristi della comunità.</p>
+        <span class="go">Materiale e preghiere</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="hours">
+  <div class="wrap split" style="align-items:start">
+    <div>
+      <p class="eyebrow">Ogni settimana</p>
+      <h2>Orari della chiesa</h2>
+      <p class="lead">Parrocchia Maria Madre della Chiesa, via Baltimora 85. La chiesa è aperta per la preghiera personale negli orari di Adorazione.</p>
+      <p><a class="btn btn-primary" href="orari.html">Tutti gli orari</a></p>
+      <p class="note">Le preghiere comunitarie di devozione e gli orari supplementari di Adorazione si concordano con il sacerdote.</p>
+    </div>
+    <div>
+      <table class="sched">
+        <caption class="kicker">Orario ordinario</caption>
+        <thead><tr><th></th><th>S. Messa</th><th>Adorazione</th><th>Confessioni</th></tr></thead>
+        <tbody>
+          <tr><td>Lunedì</td><td class="off">—</td><td class="off">—</td><td class="off">—</td></tr>
+          <tr><td>Martedì</td><td>18:30</td><td class="off">—</td><td>su richiesta</td></tr>
+          <tr><td>Mercoledì</td><td>8:00 · 18:30</td><td class="ad">17:30</td><td>17:45 – 18:20</td></tr>
+          <tr><td>Giovedì</td><td>8:00 · 18:30</td><td class="ad">17:30</td><td>17:45 – 18:20</td></tr>
+          <tr><td>Venerdì</td><td>18:30</td><td class="ad">9:00 – 18:00</td><td>17:45 – 18:20</td></tr>
+          <tr><td>Sabato</td><td>18:30</td><td class="ad">17:30</td><td class="off">—</td></tr>
+          <tr><td>Domenica</td><td>10:30 · 18:30</td><td class="ad">17:30</td><td>17:45 – 18:20</td></tr>
+        </tbody>
+      </table>
+      <p class="scrollhint">Scorri per vedere tutte le colonne →</p>
+    </div>
+  </div>
+</section>
+
+<section id="eventi">
+  <div class="wrap">
+    <p class="eyebrow">Vita della comunità</p>
+    <h2 style="margin-bottom:52px">Prossimi appuntamenti</h2>
+    <div class="event">
+      <img src="assets/img/evento.jpg" alt="Locandina dell'incontro «L'universo: caso o progetto?»">
+      <div>
+        <p class="kicker">Cinque serate · Ingresso libero</p>
+        <h3>«L'universo: caso o progetto?»</h3>
+        <p>Cinque serate in anteprima per indagare le leggi della natura, la scienza e il codice segreto alla radice di ciò che esiste. Un percorso aperto a tutti, credenti e non.</p>
+        <div class="when">
+          <div><b>13 · 20 · 27 novembre</b>e 4 · 11 dicembre</div>
+          <div><b>Ore 21:00</b>Parrocchia M2C, via Baltimora 85</div>
+        </div>
+        <p style="margin-top:18px"><a class="btn btn-line" href="eventi.html">Dettagli</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote tight">
+  <div class="wrap">
+    <p class="eyebrow" style="text-align:center">Il motto dell'Istituto</p>
+    <blockquote>«Hic Verbum caro factum est»</blockquote>
+    <p class="motto-it">E il Verbo si fece carne e venne ad abitare in mezzo a noi</p>
+    <cite>Gv 1,14</cite>
+  </div>
+</section>
+
+<section class="band tight" id="petizione">
+  <div class="wrap">
+    <div>
+      <h2>I padri restino a Torino</h2>
+      <p>I fedeli hanno chiesto al Cardinale Arcivescovo il ritorno della Famiglia Religiosa dell'IVE. Puoi leggere il testo, le testimonianze e aggiungere la tua firma.</p>
+    </div>
+    <div class="actions">
+      <a class="btn btn-white" href="{PET}">Firma la petizione</a>
+      <a class="btn btn-ghost" href="{PET}testimonianze">Testimonianze</a>
+    </div>
+  </div>
+</section>
+
+<section class="tight" id="contatti">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">Restiamo in contatto</p>
+      <h2>Un canale solo per gli avvisi importanti</h2>
+      <p class="lead">Sul canale WhatsApp pubblichiamo orari straordinari, variazioni e iniziative. La newsletter arriva una volta al mese: niente pubblicità, solo la vita della comunità.</p>
+      <p><a href="{WA}" class="btn btn-primary">Iscriviti al canale WhatsApp</a></p>
+    </div>
+    <div class="cardpanel">
+      <p class="kicker">Newsletter</p>
+      <h3>Una email al mese</h3>
+      <p>La vita della comunità, gli appuntamenti, il notiziario. Nessuna pubblicità, disdetta con un clic.</p>
+      <a class="btn btn-primary" style="width:100%;justify-content:center;margin-top:6px" href="https://groups.google.com/g/iveatorino" target="_blank" rel="noopener">Iscriviti alla newsletter</a>
+      <p class="fine">Si apre Google Gruppi: serve un account Google e un clic su «Partecipa al gruppo». In alternativa scrivi a <a href="mailto:iveatorino+subscribe@googlegroups.com?subject=Iscrizione%20newsletter">iveatorino+subscribe@googlegroups.com</a>.</p>
+    </div>
+  </div>
+</section>
+"""
+
+COMUNITA = f"""
+<section>
+  <div class="wrap split" style="align-items:start">
+    <div class="prose">
+      <p class="eyebrow">Chi siamo</p>
+      <h2>Una famiglia religiosa, una parrocchia, un quartiere</h2>
+      <p class="lead">L'Istituto del Verbo Incarnato è una famiglia religiosa della Chiesa cattolica, presente in diversi paesi, che a Torino anima la parrocchia di Maria Madre della Chiesa.</p>
+      <p>Il nome dice il programma: il Verbo si è fatto carne. Per questo la vita della comunità passa dalle cose concrete — l'Eucaristia, le persone, il lavoro, la casa — e non da un'idea astratta di spiritualità. Chi entra in chiesa in via Baltimora trova l'Adorazione esposta, i banchi, i ragazzi del catechismo, i giovani in formazione che studiano e pregano.</p>
+      <p>Accanto alla parrocchia vivono i padri dell'Istituto e i seminaristi: celebrano, confessano, accompagnano le famiglie, insegnano. È una presenza radicata nella vita del quartiere.</p>
+      <h3>Che cosa trovi qui</h3>
+      <ul class="ticks">
+        <li>Le Sante Messe feriali e festive, con gli orari aggiornati</li>
+        <li>L'Adorazione eucaristica, con il calendario e i turni</li>
+        <li>Le confessioni e il colloquio con un sacerdote</li>
+        <li>Le iniziative culturali e spirituali aperte a tutti</li>
+        <li>La preghiera e il sostegno ai padri della comunità</li>
+      </ul>
+    </div>
+    <aside class="sidecard">
+      <p class="kicker">In breve</p>
+      <dl>
+        <dt>Dove</dt><dd>Via Baltimora 85, 10137 Torino</dd>
+        <dt>Chi</dt><dd>Istituto del Verbo Incarnato (IVE)</dd>
+        <dt>Parrocchia</dt><dd>Maria Madre della Chiesa</dd>
+        <dt>Contatti</dt><dd><a href="mailto:{MAIL}">{MAIL}</a></dd>
+        <dt>Canale</dt><dd><a href="{WA}">WhatsApp</a></dd>
+      </dl>
+      <a class="btn btn-primary" style="width:100%;justify-content:center" href="contatti.html">Come arrivare</a>
+    </aside>
+  </div>
+</section>
+
+<section class="quote tight">
+  <div class="wrap">
+    <p class="eyebrow" style="text-align:center">Il motto dell'Istituto</p>
+    <blockquote>«Hic Verbum caro factum est»</blockquote>
+    <p class="motto-it">E il Verbo si fece carne e venne ad abitare in mezzo a noi</p>
+    <cite>Gv 1,14</cite>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap">
+    <p class="eyebrow">La vita di ogni giorno</p>
+    <h2 style="margin-bottom:40px">Tre cose che ci definiscono</h2>
+    <div class="doors">
+      <div class="door">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17M3.5 12h17"/></svg>
+        <h3>L'Eucaristia</h3>
+        <p>Il centro della giornata: la Messa, l'Adorazione, la preghiera davanti al Santissimo.</p>
+      </div>
+      <div class="door">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 4v6c0 4-3 7-7 8-4-1-7-4-7-8V7z"/></svg>
+        <h3>La formazione</h3>
+        <p>Seminaristi e giovani che studiano, lavorano e si preparano al sacerdozio dentro la comunità.</p>
+      </div>
+      <div class="door">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10l8-5 8 5v10z"/><path d="M9 20v-6h6v6"/></svg>
+        <h3>La parrocchia</h3>
+        <p>Catechismo, famiglie, giovani: la vita ordinaria di una parrocchia di quartiere.</p>
+      </div>
+    </div>
+  </div>
+</section>
+"""
+
+ADORAZIONE = f"""
+<section>
+  <div class="wrap split" style="align-items:start">
+    <div class="prose">
+      <p class="eyebrow">Adorazione eucaristica</p>
+      <h2>Il cuore della giornata</h2>
+      <p class="lead">Ogni venerdì la chiesa resta aperta dalle 9:00 alle 18:00 con il Santissimo esposto; una volta al mese l'Adorazione si prolunga dalla sera del giovedì fino al venerdì pomeriggio.</p>
+      <p>Per coprire tutte le ore serve qualcuno in chiesa in ogni momento. Si può prenotare un'ora — o più — dal calendario online: è il modo più semplice per garantire che l'Adorazione non si interrompa.</p>
+      <h3>Come funziona</h3>
+      <ol class="steps">
+        <li><b>Scegli l'ora</b> sul calendario e vedi subito quali sono ancora libere.</li>
+        <li><b>Prenota</b> con il tuo nome: la casella si colora e gli altri sanno che quell'ora è coperta.</li>
+        <li><b>Vieni in chiesa</b> a quell'ora, anche solo per venti minuti: l'importante è che ci sia qualcuno.</li>
+      </ol>
+      <p class="note">Se non puoi più venire, cancella la prenotazione: quell'ora torna disponibile per qualcun altro.</p>
+      <p><a class="btn btn-primary" href="{CAL}">Apri il calendario</a></p>
+    </div>
+    <aside class="sidecard">
+      <p class="kicker">Orari</p>
+      <dl>
+        <dt>Ogni venerdì</dt><dd>9:00 – 18:00</dd>
+        <dt>Primo giovedì del mese</dt><dd>dalle 22:00 del giovedì alle 18:00 del venerdì</dd>
+        <dt>Dove</dt><dd>Chiesa di Maria Madre della Chiesa, via Baltimora 85</dd>
+      </dl>
+      <a class="btn btn-primary" style="width:100%;justify-content:center" href="{CAL}">Prenota un'ora</a>
+    </aside>
+  </div>
+</section>
+
+<section class="hours">
+  <div class="wrap">
+    <p class="eyebrow">La settimana</p>
+    <h2>Adorazione e confessioni</h2>
+    <div class="tablewrap">
+      <table class="sched">
+        <caption class="kicker">Orario ordinario</caption>
+        <thead><tr><th></th><th>Adorazione</th><th>Confessioni</th><th>S. Messa</th></tr></thead>
+        <tbody>
+          <tr><td>Mercoledì</td><td class="ad">17:30</td><td>17:45 – 18:20</td><td>8:00 · 18:30</td></tr>
+          <tr><td>Giovedì</td><td class="ad">17:30</td><td>17:45 – 18:20</td><td>8:00 · 18:30</td></tr>
+          <tr><td>Venerdì</td><td class="ad">9:00 – 18:00</td><td>17:45 – 18:20</td><td>18:30</td></tr>
+          <tr><td>Sabato</td><td class="ad">17:30</td><td class="off">—</td><td>18:30</td></tr>
+          <tr><td>Domenica</td><td class="ad">17:30</td><td>17:45 – 18:20</td><td>10:30 · 18:30</td></tr>
+        </tbody>
+      </table>
+      <p class="scrollhint">Scorri per vedere tutte le colonne →</p>
+    </div>
+    <p class="note">La domenica le confessioni seguono l'orario feriale. Per un colloquio in altri momenti scrivi a <a href="mailto:{MAIL}">{MAIL}</a>.</p>
+  </div>
+</section>
+"""
+
+ORARI = f"""
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Ogni settimana</p>
+    <h2>Orari della chiesa</h2>
+    <p class="lead" style="max-width:60ch">Parrocchia Maria Madre della Chiesa, via Baltimora 85. Gli orari possono cambiare nelle feste e in estate: in quel caso lo trovi sul canale WhatsApp.</p>
+    <div class="tablewrap">
+      <table class="sched big">
+        <thead><tr><th></th><th>S. Messa</th><th>Adorazione</th><th>Confessioni</th><th>Ufficio</th></tr></thead>
+        <tbody>
+          <tr><td>Lunedì</td><td class="off">—</td><td class="off">—</td><td class="off">—</td><td class="off">—</td></tr>
+          <tr><td>Martedì</td><td>18:30</td><td class="off">—</td><td>su appuntamento</td><td>Segreteria 17:00 – 18:00</td></tr>
+          <tr><td>Mercoledì</td><td>8:00 · 18:30</td><td class="ad">17:30</td><td>17:45 – 18:20</td><td>Segreteria 17:00 – 18:00<br>Don 19:15 – 20:00</td></tr>
+          <tr><td>Giovedì</td><td>8:00 · 18:30</td><td class="ad">17:30</td><td>17:45 – 18:20</td><td>Don 11:00 – 12:30<br>Segreteria 17:00 – 18:00</td></tr>
+          <tr><td>Venerdì</td><td>18:30</td><td class="ad">9:00 – 18:00<br><span class="tiny">continua</span></td><td>17:45 – 18:20</td><td>Segreteria 17:00 – 18:00</td></tr>
+          <tr><td>Sabato e vigilie</td><td>18:30</td><td class="ad">17:30</td><td class="off">—</td><td class="off">—</td></tr>
+          <tr><td>Domenica e feste</td><td>10:30 · 18:30</td><td class="ad">17:30</td><td>17:45 – 18:20</td><td class="off">—</td></tr>
+        </tbody>
+      </table>
+      <p class="scrollhint">Scorri per vedere tutte le colonne →</p>
+    </div>
+    <p class="note">Il martedì le confessioni si prenotano al campanello dell'ufficio o si chiedono al sacerdote. Le preghiere comunitarie di devozione e gli orari supplementari di Adorazione si concordano con il don. Per un appuntamento scrivi a <a href="mailto:{MAIL}">{MAIL}</a>.</p>
+    <p><a class="btn btn-primary" href="adorazione.html">Calendario dell'Adorazione</a></p>
+  </div>
+</section>
+
+<section class="hours">
+  <div class="wrap split" style="align-items:start">
+    <div>
+      <p class="eyebrow">Prima di venire</p>
+      <h2>Tre cose utili</h2>
+      <p class="lead">La chiesa si raggiunge in tram o in auto; il parcheggio è in cortile.</p>
+      <p><a class="btn btn-line" href="contatti.html">Come arrivare</a></p>
+    </div>
+    <div class="prose">
+      <h3>Adorazione</h3>
+      <p>Il venerdì la chiesa resta aperta dalle 9:00 alle 18:00 con l'Adorazione continua. Negli altri giorni il Santissimo è esposto dalle 17:30, prima della Messa serale.</p>
+      <h3>Confessioni</h3>
+      <p>Mercoledì, giovedì e venerdì dalle 17:45 alle 18:20; la domenica lo stesso orario. Il martedì si prenotano al campanello dell'ufficio.</p>
+      <h3>Feste ed estate</h3>
+      <p>Gli orari delle solennità vengono pubblicati sul canale WhatsApp e sul bollettino parrocchiale.</p>
+    </div>
+  </div>
+</section>
+"""
+
+EVENTI = f"""
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Vita della comunità</p>
+    <h2>Prossimi appuntamenti</h2>
+    <div class="event" style="margin-top:52px">
+      <img src="assets/img/evento.jpg" alt="Locandina dell'incontro «L'universo: caso o progetto?»">
+      <div>
+        <p class="kicker">Cinque serate · Ingresso libero · Ore 21:00</p>
+        <h3>«L'universo: caso o progetto?»</h3>
+        <p>Cinque serate in anteprima per indagare le leggi della natura, la scienza e il codice segreto alla radice di ciò che esiste. Un percorso aperto a tutti, credenti e non, a cura della parrocchia con gli amici di «Verso l'Alto».</p>
+        <div class="when">
+          <div><b>13 · 20 · 27 novembre</b>e 4 · 11 dicembre</div>
+          <div><b>Parrocchia M2C</b>Via Baltimora 85, Torino</div>
+        </div>
+        <p class="note">Non serve iscrizione. Per informazioni: <a href="mailto:{MAIL}">{MAIL}</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hours">
+  <div class="wrap">
+    <p class="eyebrow">Ogni settimana</p>
+    <h2>Appuntamenti fissi</h2>
+    <div class="doors" style="margin-top:36px">
+      <div class="door">
+        <h3>Adorazione</h3>
+        <p>Venerdì 9:00 – 18:00; primo giovedì del mese dalle 22:00.</p>
+        <a class="go" href="adorazione.html">Calendario</a>
+      </div>
+      <div class="door">
+        <h3>Messe</h3>
+        <p>Feriale 18:30; domenica 10:30 e 18:30.</p>
+        <a class="go" href="orari.html">Tutti gli orari</a>
+      </div>
+      <div class="door">
+        <h3>Confessioni</h3>
+        <p>Ogni giorno feriale 17:45 – 18:20, e su richiesta.</p>
+        <a class="go" href="orari.html">Dettagli</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap">
+    <p class="eyebrow">Archivio</p>
+    <h2 style="margin-bottom:18px">Appuntamenti passati</h2>
+    <p class="lead" style="max-width:62ch">Le locandine e i resoconti degli incontri già svolti restano qui, così chi arriva dopo può farsi un'idea di cosa si fa in parrocchia.</p>
+    <p class="note">Nessun evento archiviato: è lo spazio da riempire con le prime tre o quattro schede.</p>
+  </div>
+</section>
+"""
+
+CONTATTI = f"""
+<section>
+  <div class="wrap split" style="align-items:start">
+    <div class="prose">
+      <p class="eyebrow">Contatti</p>
+      <h2>Dove trovarci</h2>
+      <p class="lead">Chiesa e parrocchia di Maria Madre della Chiesa, via Baltimora 85, 10137 Torino.</p>
+      <p>Per informazioni su orari, sacramenti, catechismo o iniziative scrivi a <a href="mailto:{MAIL}">{MAIL}</a>. Per gli avvisi urgenti (variazioni di orario, feste, eventi) il canale WhatsApp è il mezzo più rapido.</p>
+      <p><a class="btn btn-primary" href="{MAPS}" target="_blank" rel="noopener">Apri in Google Maps</a></p>
+      <h3>Newsletter</h3>
+      <p>Una volta al mese, la vita della comunità. Per iscriverti basta un account Google: si apre il gruppo, si clicca «Partecipa al gruppo», fine.</p>
+      <p><a class="btn btn-primary" href="https://groups.google.com/g/iveatorino" target="_blank" rel="noopener">Iscriviti alla newsletter</a></p>
+      <p class="fine">Senza account Google puoi iscriverti scrivendo a <a href="mailto:iveatorino+subscribe@googlegroups.com?subject=Iscrizione%20newsletter">iveatorino+subscribe@googlegroups.com</a>. Per scrivere alla redazione: <a href="mailto:newsletter@iveatorino.it">newsletter@iveatorino.it</a>.</p>
+    </div>
+    <aside class="sidecard">
+      <p class="kicker">Recapiti</p>
+      <dl>
+        <dt>Indirizzo</dt><dd>Via Baltimora 85<br>10137 Torino</dd>
+        <dt>Email</dt><dd><a href="mailto:{MAIL}">{MAIL}</a></dd>
+        <dt>WhatsApp</dt><dd><a href="{WA}">Canale «IVE a Torino»</a></dd>
+        <dt>Siti</dt><dd><a href="{PET}">Petizione</a> · <a href="{PRE}">Preghiere</a></dd>
+      </dl>
+    </aside>
+  </div>
+</section>
+
+<section class="hours tight">
+  <div class="wrap">
+    <p class="eyebrow">Ultimi numeri</p>
+    <h2 style="margin-bottom:26px">Il notiziario della comunità</h2>
+    <div class="issues">
+      <a class="issue" href="https://groups.google.com/g/iveatorino" target="_blank" rel="noopener">
+        <span class="date">8 novembre 2026</span>
+        <span class="ttl">Nasce la nuova rivista: «Cristo in Tutto»</span>
+        <span class="desc">Notiziario di novembre: la nuova rivista della comunità, «Omnia in Christo instauranda».</span>
+      </a>
+      <a class="issue" href="https://groups.google.com/g/iveatorino" target="_blank" rel="noopener">
+        <span class="date">8 novembre 2026</span>
+        <span class="ttl">Cronache IVE dal Mondo</span>
+        <span class="desc">Egitto e Tanzania: «Andate in tutto il mondo e predicate il vangelo».</span>
+      </a>
+    </div>
+    <p class="note">Tutti i numeri restano nell'archivio del gruppo; l'iscrizione serve a riceverli per email.</p>
+  </div>
+</section>
+
+<section class="hours tight">
+  <div class="wrap">
+    <div class="map">
+      <iframe title="Mappa: via Baltimora 85, Torino"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=7.6325%2C45.0415%2C7.6465%2C45.0495&amp;layer=mapnik&amp;marker=45.0455489%2C7.6395122"
+        loading="lazy"></iframe>
+    </div>
+    <p class="note">La chiesa è in via Baltimora 85, zona Santa Rita. Per il percorso più comodo usa «Indicazioni stradali», oppure apri la posizione in OpenStreetMap: <a href="https://www.openstreetmap.org/?mlat=45.0455489&amp;mlon=7.6395122#map=17/45.04555/7.63951">vedi sulla mappa</a>.</p>
+  </div>
+</section>
+"""
+
+PRIVACY = f"""
+<section class="tight">
+  <div class="wrap prose">
+    <p class="eyebrow">Informazioni legali</p>
+    <h1 style="font-size:2.4rem">Privacy e cookie</h1>
+    <p class="lead">Questa pagina spiega quali dati raccogliamo attraverso il sito e come vengono trattati.</p>
+    <h3>Titolare del trattamento</h3>
+    <p>IVE a Torino — Parrocchia Maria Madre della Chiesa, via Baltimora 85, 10137 Torino. Contatto: <a href="mailto:{MAIL}">{MAIL}</a>.</p>
+    <h3>Quali dati raccogliamo</h3>
+    <ul class="ticks">
+      <li><b>Newsletter</b>: l'indirizzo email che ci comunichi iscrivendoti al gruppo Google «IVE a Torino». Serve solo a inviarti gli aggiornamenti; puoi cancellarti in qualsiasi momento.</li>
+      <li><b>Petizione</b>: nome e cognome, città ed eventuale messaggio, raccolti sul sito <a href="{PET}">petizione.iveatorino.it</a> per presentare l'appello all'Autorità ecclesiastica.</li>
+      <li><b>Navigazione</b>: questo sito non usa cookie propri, non profila e non vende dati. La mappa è servita da OpenStreetMap, che non imposta cookie di profilazione.</li>
+    </ul>
+    <h3>Base giuridica e diritti</h3>
+    <p>Il trattamento si basa sul consenso (newsletter) e sull'interesse legittimo a sostenere l'appello (petizione). Puoi chiedere accesso, rettifica o cancellazione scrivendo a <a href="mailto:{MAIL}">{MAIL}</a>.</p>
+    <h3>Conservazione</h3>
+    <p>I dati della newsletter restano finché non chiedi la cancellazione; quelli della petizione per il tempo necessario alla sua presentazione.</p>
+    <p class="note">Bozza da far verificare prima della pubblicazione: aggiungere eventuale responsabile del trattamento, tempi esatti e riferimenti al registro delle attività.</p>
+  </div>
+</section>
+"""
+
+PAGES = [
+    ("index.html", "IVE a Torino — Comunità dell'Istituto del Verbo Incarnato",
+     "La comunità dell'Istituto del Verbo Incarnato a Torino: Adorazione eucaristica, orari della parrocchia Maria Madre della Chiesa, eventi e contatti.",
+     "index.html", HOME, None, None),
+    ("comunita.html", "La comunità — IVE a Torino",
+     "Chi è l'Istituto del Verbo Incarnato a Torino: la famiglia religiosa, la parrocchia Maria Madre della Chiesa, la formazione dei seminaristi.",
+     "comunita.html", COMUNITA, "La comunità", "Una famiglia religiosa, una parrocchia, un quartiere."),
+    ("adorazione.html", "Adorazione eucaristica — IVE a Torino",
+     "Orari e calendario dell'Adorazione eucaristica a Maria Madre della Chiesa, Torino: ogni venerdì dalle 9:00 alle 18:00, primo giovedì del mese.",
+     "adorazione.html", ADORAZIONE, "Adorazione eucaristica", "Ogni venerdì il Santissimo è esposto dalle 9:00 alle 18:00."),
+    ("orari.html", "Orari e Messe — IVE a Torino",
+     "Orari di Sante Messe, Adorazione e confessioni della parrocchia Maria Madre della Chiesa, via Baltimora 85, Torino.",
+     "orari.html", ORARI, "Orari e Messe", "Parrocchia Maria Madre della Chiesa, via Baltimora 85."),
+    ("eventi.html", "Eventi — IVE a Torino",
+     "Gli appuntamenti della comunità IVE a Torino: incontri, serate culturali, liturgie e iniziative aperte a tutti.",
+     "eventi.html", EVENTI, "Eventi", "Le iniziative aperte a tutti, dentro e fuori la parrocchia."),
+    ("contatti.html", "Contatti — IVE a Torino",
+     "Dove trovarci: via Baltimora 85, Torino. Email, canale WhatsApp e newsletter della comunità IVE a Torino.",
+     "contatti.html", CONTATTI, "Contatti", "Via Baltimora 85, 10137 Torino."),
+    ("privacy.html", "Privacy e cookie — IVE a Torino",
+     "Informativa sul trattamento dei dati personali del sito iveatorino.it.",
+     "privacy.html", PRIVACY, None, None),
+]
+
+def main():
+    os.makedirs(os.path.join(BASE, "assets", "css"), exist_ok=True)
+    os.makedirs(os.path.join(BASE, "assets", "img"), exist_ok=True)
+    for slug, title, desc, active, body, ht, hs in PAGES:
+        html_out = page(slug, title, desc, active, body, ht, hs)
+        with open(os.path.join(BASE, slug), "w", encoding="utf-8") as fh:
+            fh.write(html_out)
+    print("Generati:", ", ".join(p[0] for p in PAGES))
+
+if __name__ == "__main__":
+    main()
